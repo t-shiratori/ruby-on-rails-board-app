@@ -8,7 +8,8 @@ class BoardsController < ApplicationController
     end
 
     def create
-        Board.create(board_params)
+        board = Board.create(board_params)
+        redirect_to board # 新規作成されたIDに対応するURLにリダイレクトさせる
         # binding.pry
     end
 
@@ -23,8 +24,13 @@ class BoardsController < ApplicationController
     def update
         board = Board.find(params[:id])
         board.update(board_params)
-
         redirect_to board
+    end
+
+    def destroy
+        board = Board.find(params[:id])
+        board.delete
+        redirect_to boards_path
     end
 
     private

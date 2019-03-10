@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'new/create'
-
-  get 'new/me'
-
   get 'home/index'
 
   get 'sessions/create'

@@ -1,5 +1,7 @@
 <h1>ログイン</h1>
 
+<%= render 'shared/error_messages' %>
+
 <%= form_with scope: :session, url: login_path do |f| %>
   <div class="form-group">
     <%= f.label :name, 'ユーザー名' %>

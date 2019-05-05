@@ -6,7 +6,13 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to mypage_path
     else
-      render 'home/index'
+      if user
+        redirect_back(fallback_location: root_path)
+        flash[:error_messages] = ['パスワードが間違っています']
+      else
+        redirect_back(fallback_location: root_path)
+        flash[:error_messages] = ['未登録のユーザーです']
+      end
     end
   end
 

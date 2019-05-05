@@ -2,7 +2,15 @@ class BoardsController < ApplicationController
     before_action :set_target_board, only: %i[show edit update destroy]
   
     def index
-      @boards = params[:tag_id].present? ? Tag.find(params[:tag_id]).boards : Board.all
+      # タグ検索
+      if params[:tag_id].present? then
+        @boards = Tag.find(params[:tag_id]).boards
+      # サーチボックス検索
+      elsif params[:search].present? then
+        @boards = Board.where(['name LIKE ?', "%#{params[:search]}%"])
+      else
+        @boards = Board.all
+      end
       @boards = @boards.page(params[:page])
     end
   
